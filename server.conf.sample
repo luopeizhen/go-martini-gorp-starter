@@ -3,11 +3,7 @@
         "port": 10001
     },
     "db": {
-        "host": "localhost",
-        "port": 3306,
-        "user": "root",
-        "password": "123",
-        "database": "dbtest",
+        "source": "root:123@tcp(localhost:3306)/dbtest",
         "max_conn": 2,
         "max_idle": 2,
         "life_time": 3600

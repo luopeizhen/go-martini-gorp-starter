@@ -17,9 +17,7 @@ func main() {
 
 	//init DB
 	err := tools.CreateDbConn("default",
-		conf.Db.Host,
-		conf.Db.Port,
-		conf.Db.User, conf.Db.Password, conf.Db.Database,
+		conf.Db.Source,
 		conf.Db.MaxConn,
 		conf.Db.MaxIdle,
 		conf.Db.LifeTime,

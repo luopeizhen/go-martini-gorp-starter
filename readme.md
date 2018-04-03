@@ -24,6 +24,12 @@ ALTER TABLE `table1`
 ### 配置
 server.conf.sample 改名为 server.conf 放在bin和执行文件放在一起
 
+### 数据库的表格定义
+可以使用gen_model.go自动生成, 例如
+```
+go run src/gen_model/gen_model.go -dbSource "root:123@tcp(localhost:3306)/dbtest" > src/model/model.go
+```
+
 
 ### 编译
 编译前要把当前目录加入GOPATH, vscode里面已经设置了支持windows编译

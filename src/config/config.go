@@ -12,11 +12,7 @@ type Conf struct {
 		Port int
 	}
 	Db struct {
-		Host     string
-		Port     int
-		User     string
-		Password string
-		Database string
+		Source   string
 		MaxConn  int `json:"max_conn"`
 		MaxIdle  int `json:"max_idle"`
 		LifeTime int `json:"life_time"`

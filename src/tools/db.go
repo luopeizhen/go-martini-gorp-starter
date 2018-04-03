@@ -2,7 +2,6 @@ package tools
 
 import (
 	"database/sql"
-	"fmt"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -28,12 +27,10 @@ func GetDb(name string) *DbConn {
 	return dbConnMap[name]
 }
 
-func CreateDbConn(name string, host string, port int, user, password, database string, maxConn, maxIdle, lifeTime int) (err error) {
+func CreateDbConn(name string, dbSource string, maxConn, maxIdle, lifeTime int) (err error) {
 	if _, exist := dbConnMap[name]; exist {
 		return
 	}
-
-	dbSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", user, password, host, port, database)
 
 	db, err := sql.Open("mysql", dbSource)
 	if err != nil {
