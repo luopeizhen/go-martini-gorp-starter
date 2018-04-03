@@ -27,6 +27,7 @@ func DefaultGetHome(req *http.Request, r render.Render) {
 	items := getAllItems()
 
 	r.HTML(200, "default/home", map[string]interface{}{
+		"title": "I am title",
 		"items": items,
 	})
 }
