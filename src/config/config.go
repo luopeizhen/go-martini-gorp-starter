@@ -17,9 +17,9 @@ type Conf struct {
 		User     string
 		Password string
 		Database string
-		MaxConn  int
-		MaxIdle  int
-		LifeTime int
+		MaxConn  int `json:"max_conn"`
+		MaxIdle  int `json:"max_idle"`
+		LifeTime int `json:"life_time"`
 	}
 }
 
