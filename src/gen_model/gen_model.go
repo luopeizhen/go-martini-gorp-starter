@@ -71,10 +71,12 @@ func main() {
 	defer dbmap.Db.Close()
 
 	type TIB struct {
-		Name string `db:"Tables_in_dbtest"`
+		Name string `db:"name"`
 	}
 	var tibs []TIB
-	_, err := dbmap.Select(&tibs, "show tables")
+	pos := strings.LastIndex(dbSource, "/")
+	dbName := dbSource[pos:]
+	_, err := dbmap.Select(&tibs, "SELECT TABLE_NAME AS `name` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '"+dbName+"'")
 	if err != nil {
 		panic(err)
 	}
