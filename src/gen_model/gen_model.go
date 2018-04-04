@@ -75,7 +75,8 @@ func main() {
 	}
 	var tibs []TIB
 	pos := strings.LastIndex(dbSource, "/")
-	dbName := dbSource[pos:]
+	dbName := dbSource[(pos + 1):]
+	//fmt.Println("dbName:", dbName)
 	_, err := dbmap.Select(&tibs, "SELECT TABLE_NAME AS `name` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '"+dbName+"'")
 	if err != nil {
 		panic(err)
