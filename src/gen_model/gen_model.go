@@ -90,7 +90,7 @@ func main() {
 		cItems, err := dbmap.Select(COLUMNS{}, "show columns from `"+tib.Name+"`")
 		panicCheck(err)
 
-		fmt.Printf("type %s struct{\n", capital(tib.Name))
+		fmt.Printf("type %s struct{\n", toExportName(tib.Name))
 		for i, _ := range cItems {
 			cItem := cItems[i].(*COLUMNS)
 			name := toExportName(cItem.Field)
