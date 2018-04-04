@@ -16,13 +16,10 @@ func main() {
 	conf := config.Get()
 
 	//init DB
-	err := tools.CreateDbConn("default",
-		conf.Db.Source,
-		conf.Db.MaxConn,
-		conf.Db.MaxIdle,
-		conf.Db.LifeTime,
-	)
-	tools.CheckErr(err)
+	for _, db := range conf.Dbs {
+		err := tools.CreateDbConn(db.Database, db.Host, db.Port, db.User, db.Password, db.MaxConn, db.MaxIdle, db.LifeTime)
+		tools.CheckErr(err)
+	}
 
 	m := martini.Classic()
 	m.Use(render.Renderer(render.Options{

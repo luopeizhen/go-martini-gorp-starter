@@ -2,6 +2,7 @@ package tools
 
 import (
 	"database/sql"
+	"fmt"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -14,23 +15,27 @@ type DbConn struct {
 }
 
 var dbConnMap map[string]*DbConn
+var defaultDbName string
 
 func init() {
 	dbConnMap = make(map[string]*DbConn)
+	defaultDbName = ""
 }
 
 func GetDefDb() *DbConn {
-	return GetDb("default")
+	return GetDb(defaultDbName)
 }
 
 func GetDb(name string) *DbConn {
 	return dbConnMap[name]
 }
 
-func CreateDbConn(name string, dbSource string, maxConn, maxIdle, lifeTime int) (err error) {
-	if _, exist := dbConnMap[name]; exist {
+func CreateDbConn(database, host string, port int, user, password string, maxConn, maxIdle, lifeTime int) (err error) {
+	if _, exist := dbConnMap[database]; exist {
 		return
 	}
+
+	dbSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", user, password, host, port, database)
 
 	db, err := sql.Open("mysql", dbSource)
 	if err != nil {
@@ -48,8 +53,12 @@ func CreateDbConn(name string, dbSource string, maxConn, maxIdle, lifeTime int) 
 
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
 
-	dbConnMap[name] = &DbConn{
-		Name:  name,
+	if defaultDbName == "" {
+		defaultDbName = database
+	}
+
+	dbConnMap[database] = &DbConn{
+		Name:  database,
 		DbMap: dbmap,
 	}
 
