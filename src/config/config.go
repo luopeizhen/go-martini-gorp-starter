@@ -40,7 +40,7 @@ func Get() *Conf {
 
 func Load() {
 	conf = &Conf{}
-	b, err := ioutil.ReadFile("priceapi.conf")
+	b, err := ioutil.ReadFile("server.conf")
 	tools.CheckErr(err)
 
 	err = json.Unmarshal(b, conf)
