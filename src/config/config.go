@@ -38,9 +38,9 @@ func Get() *Conf {
 	return conf
 }
 
-func Load() {
+func Load(configFile string) {
 	conf = &Conf{}
-	b, err := ioutil.ReadFile("server.conf")
+	b, err := ioutil.ReadFile(configFile)
 	tools.CheckErr(err)
 
 	err = json.Unmarshal(b, conf)

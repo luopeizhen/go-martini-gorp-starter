@@ -2,6 +2,7 @@ package main
 
 import (
 	"config"
+	"flag"
 	"fmt"
 	"tools"
 
@@ -10,8 +11,11 @@ import (
 )
 
 func main() {
+	configFile := ""
+	flag.StringVar(&configFile, "c", "server.conf", "config file")
+	flag.Parse()
 	//load config
-	config.Load()
+	config.Load(configFile)
 
 	conf := config.Get()
 

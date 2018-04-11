@@ -34,6 +34,8 @@ go run src/gen_model/gen_model.go -dbSource "root:123@tcp(localhost:3306)/dbtest
 ### 编译
 编译前要把当前目录加入GOPATH, vscode里面已经设置了支持windows编译
 
+vscode里面的默认task是在win10里面编译
+
 linux命令行编译
 ```
 env GOPATH="`pwd`:$GOPATH" go install server
