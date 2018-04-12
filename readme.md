@@ -1,5 +1,13 @@
 ## 说明
-这个例子包含了如何搭建martini并返回html或json, go的模板如何使用, 数据库的 查询, 插入, 更新, 删除
+包含了
+- 搭建go开发环境
+- go语言的一些学习网站
+- 一个web server例子
+如何使用go-martini搭建基本webserver, 返回html或json, go的模板如何使用, 数据库的 查询, 插入, 更新, 删除
+
+
+!!! 使用前先看doc里面的文档
+
 
 
 ### 数据库准备
@@ -25,6 +33,7 @@ ALTER TABLE `table1`
 server.conf.sample 改名为 server.conf 放在bin和执行文件放在一起
 
 ### 数据库的表格定义
+gorp库读取数据库表的记录, 要先定义这个表的结构,
 可以使用gen_model.go自动生成, 例如
 ```
 go run src/gen_model/gen_model.go -dbSource "root:123@tcp(localhost:3306)/dbtest" > src/model/model.go
@@ -32,11 +41,9 @@ go run src/gen_model/gen_model.go -dbSource "root:123@tcp(localhost:3306)/dbtest
 
 
 ### 编译
-编译前要把当前目录加入GOPATH, vscode里面已经设置了支持windows编译
+双击setvar.bat, 会打开控制台并将当前目录加入到GOPATH 
 
-vscode里面的默认task是在win10里面编译
-
-linux命令行编译
+然后在控制台执行
 ```
-env GOPATH="`pwd`:$GOPATH" go install server
+go install server
 ```
