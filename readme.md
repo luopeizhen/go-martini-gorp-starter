@@ -39,6 +39,13 @@ gorp库读取数据库表的记录, 要先定义这个表的结构,
 go run src/gen_model/gen_model.go -dbSource "root:123@tcp(localhost:3306)/dbtest" > src/model/model.go
 ```
 
+### 编译前准备
+编译前需要下载一些第三方库, 参考doc里面的文档, 新开一个控制台, 然后执行
+```
+go get 缺少的库地址
+```
+这些缺少的库会在编译时报错, 缺哪个就装哪个
+
 
 ### 编译
 双击setvar.bat, 会打开控制台并将当前目录加入到GOPATH 
