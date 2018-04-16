@@ -99,7 +99,10 @@ func main() {
 				fieldType = "int"
 			} else if strings.Index(cItem.Type, "bigint(") == 0 {
 				fieldType = "int64"
-			} else if strings.Index(cItem.Type, "varchar(") == 0 || strings.Index(cItem.Type, "char(") == 0 || strings.Index(cItem.Type, "text") == 0 {
+			} else if strings.Index(cItem.Type, "varchar(") == 0 || strings.Index(cItem.Type, "char(") == 0 ||
+				strings.Index(cItem.Type, "text") == 0 ||
+				strings.Index(cItem.Type, "mediumtext") == 0 ||
+				strings.Index(cItem.Type, "longtext") == 0 {
 				if cItem.Null == "YES" {
 					fieldType = "sql.NullString"
 				} else {
