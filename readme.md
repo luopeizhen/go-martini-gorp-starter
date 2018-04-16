@@ -1,9 +1,14 @@
 ## 说明
-包含了
+
+代码主要是演示使用go-martini搭建基本webserver, 返回html或json, go的模板如何使用, 数据库的 查询, 插入, 更新, 删除
+
+还包含了
 - 搭建go开发环境
 - go语言的一些学习网站
+- gopath的说明
 - 一个web server例子
-如何使用go-martini搭建基本webserver, 返回html或json, go的模板如何使用, 数据库的 查询, 插入, 更新, 删除
+- 编译go代码到exe
+- 监控go代码, 如果发现修改自动编译
 
 
 !!! 使用前先看doc里面的文档
