@@ -30,7 +30,7 @@ ALTER TABLE `table1`
 ```
 
 ### 配置
-server.conf.sample 改名为 server.conf 放在bin和执行文件放在一起
+server.conf.sample 复制为 server.conf, 然后修改配置信息
 
 ### 数据库的表格定义
 gorp库读取数据库表的记录, 要先定义这个表的结构,
@@ -47,7 +47,17 @@ go get 缺少的库地址
 这些缺少的库会在编译时报错, 缺哪个就装哪个
 
 
-### 编译
+### 自动编译
+第一次要安装一个监控程序, 自动监控go的源文件目录, 当有修改自动编译重启
+新开一个控制台, 然后执行
+```
+github.com/luopeizhen/gin
+```
+
+安装完成后, 执行watch.bat
+
+
+### 手动编译
 双击setvar.bat, 会打开控制台并将当前目录加入到GOPATH 
 
 然后在控制台执行
