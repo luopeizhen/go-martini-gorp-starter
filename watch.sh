@@ -1,1 +1,1 @@
-env GOPATH=`pwd`:${GOPATH} gin --bin bin/server.exe --path src --build src/server --appPort 10001
+env GOPATH=`pwd`:${GOPATH} gin --bin bin/server --path src --build src/server --appPort 10001
