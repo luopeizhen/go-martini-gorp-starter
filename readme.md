@@ -61,6 +61,8 @@ github.com/luopeizhen/gin
 
 安装完成后, 执行watch.bat
 
+watch执行后, 访问localhost:3000
+
 
 ### 手动编译
 双击setvar.bat, 会打开控制台并将当前目录加入到GOPATH 

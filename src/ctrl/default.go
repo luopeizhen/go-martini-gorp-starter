@@ -35,9 +35,10 @@ func DefaultGetHome(req *http.Request, r render.Render) {
 //增加一个记录
 func DefaultPostHome(req *http.Request, r render.Render) {
 	type Input struct {
-		Name string
+		Name string `json:"name"` //需要指定json的名称, 解析的时候根据这个匹配
 	}
 
+	//接收客户端post的json, 需要先读取body的内容, 然后把json解析成golang的类型
 	b, err := ioutil.ReadAll(req.Body)
 	tools.CheckErr(err)
 
@@ -48,8 +49,7 @@ func DefaultPostHome(req *http.Request, r render.Render) {
 	fmt.Printf("Input item:%+v\n", data)
 
 	dbConn := tools.GetDefDb()
-	sql := fmt.Sprintf("insert into `table1` (`name`) values('%s')", data.Name)
-	res, err := dbConn.DbMap.Exec(sql)
+	res, err := dbConn.DbMap.Exec("insert into `table1` (`name`) values(?)", data.Name)
 	tools.CheckErr(err)
 
 	lastId, err := res.LastInsertId()
@@ -57,7 +57,10 @@ func DefaultPostHome(req *http.Request, r render.Render) {
 
 	fmt.Println("lastId:", lastId)
 
-	r.JSON(200, nil)
+	//r.JSON会把第二个参数自动转为json
+	r.JSON(200, map[string]interface{}{
+		"insert_id": lastId,
+	})
 }
 
 //修改一个记录
@@ -77,8 +80,7 @@ func DefaultPutHome(req *http.Request, r render.Render) {
 	fmt.Printf("Input item:%+v\n", data)
 
 	dbConn := tools.GetDefDb()
-	sql := fmt.Sprintf("update `table1` set `name`='%s' where `id`=%d", data.Name, data.Id)
-	res, err := dbConn.DbMap.Exec(sql)
+	res, err := dbConn.DbMap.Exec("update `table1` set `name`=? where `id`=?", data.Name, data.Id)
 	tools.CheckErr(err)
 
 	affectedCount, err := res.RowsAffected()
@@ -97,8 +99,7 @@ func DefaultDeleteHome(req *http.Request, r render.Render) {
 	id, _ := strconv.ParseInt(req.Form.Get("id"), 10, 64)
 
 	dbConn := tools.GetDefDb()
-	sql := fmt.Sprintf("delete from table1 where id=%d", id)
-	res, err := dbConn.DbMap.Exec(sql)
+	res, err := dbConn.DbMap.Exec("delete from table1 where id=?", id)
 	tools.CheckErr(err)
 
 	affectedCount, err := res.RowsAffected()
