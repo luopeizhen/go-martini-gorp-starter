@@ -27,8 +27,8 @@ func main() {
 
 	m := martini.Classic()
 	m.Use(render.Renderer(render.Options{
-		Directory:  "./templates",     // Specify what path to load the templates from.
-		Extensions: []string{".html"}, // Specify extensions to load for templates.
+		Directory:  "./templates",       // Specify what path to load the templates from.
+		Extensions: []string{".gohtml"}, // Specify extensions to load for templates.
 	}))
 
 	//初始化路由
