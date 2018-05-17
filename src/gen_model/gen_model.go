@@ -85,12 +85,16 @@ func main() {
 	//TABLE_NAME := "user"
 	fmt.Println("package model")
 
+	bImportSql := false
+
+	code := ""
+
 	for _, tib := range tibs {
 
 		cItems, err := dbmap.Select(COLUMNS{}, "show columns from `"+tib.Name+"`")
 		panicCheck(err)
 
-		fmt.Printf("type %s struct{\n", toExportName(tib.Name))
+		code += fmt.Sprintf("type %s struct{\n", toExportName(tib.Name))
 		for i, _ := range cItems {
 			cItem := cItems[i].(*COLUMNS)
 			name := toExportName(cItem.Field)
@@ -105,6 +109,7 @@ func main() {
 				strings.Index(cItem.Type, "longtext") == 0 {
 				if cItem.Null == "YES" {
 					fieldType = "sql.NullString"
+					bImportSql = true
 				} else {
 					fieldType = "string"
 				}
@@ -114,9 +119,15 @@ func main() {
 				fieldType = "string"
 			}
 
-			fmt.Printf("\t%s %s `db:\"%s\" json:\"%s\"`\n", name, fieldType, cItem.Field, cItem.Field)
+			code += fmt.Sprintf("\t%s %s `db:\"%s\" json:\"%s\"`\n", name, fieldType, cItem.Field, cItem.Field)
 		}
-		fmt.Printf("}\n")
+		code += fmt.Sprintf("}\n")
 	}
+
+	if bImportSql {
+		fmt.Println(`import ("database/sql")`)
+	}
+
+	fmt.Println(code)
 
 }
