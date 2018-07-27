@@ -41,7 +41,7 @@ server.conf.sample 复制为 server.conf, 然后修改配置信息
 gorp库读取数据库表的记录, 要先定义这个表的结构,
 可以使用gen_model.go自动生成, 例如
 ```
-go run src/gen_model/gen_model.go -dbSource "root:123@tcp(localhost:3306)/dbtest" > src/model/model.go
+go run src/gen_model/gen_model.go -dbSource "root:123@tcp(localhost:3306)/dbtest" > src/model/model.autogen.go
 ```
 
 ### 编译前准备
