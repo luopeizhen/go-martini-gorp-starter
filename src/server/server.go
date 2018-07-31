@@ -4,6 +4,8 @@ import (
 	"config"
 	"flag"
 	"fmt"
+	"log"
+	"os"
 	"tools"
 
 	"github.com/go-martini/martini"
@@ -23,6 +25,9 @@ func main() {
 	for _, db := range conf.Dbs {
 		err := tools.CreateDbConn(db.Database, db.Host, db.Port, db.User, db.Password, db.MaxConn, db.MaxIdle, db.LifeTime)
 		tools.CheckErr(err)
+		if db.Trace == 1 {
+			tools.GetDb(db.Database).DbMap.TraceOn("[db]", log.New(os.Stdout, "myapp:", log.Lmicroseconds))
+		}
 	}
 
 	m := martini.Classic()

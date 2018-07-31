@@ -9,6 +9,7 @@
         "database": "dbtest",
         "max_conn": 10,
         "max_idle": 10,
-        "life_time": 3600
+        "life_time": 3600,
+        "trace": 0
     }]
 }

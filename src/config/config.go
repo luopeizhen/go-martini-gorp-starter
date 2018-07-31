@@ -16,6 +16,7 @@ type Db struct {
 	MaxConn  int `json:"max_conn"`
 	MaxIdle  int `json:"max_idle"`
 	LifeTime int `json:"life_time"`
+	Trace    int
 }
 
 type Conf struct {
