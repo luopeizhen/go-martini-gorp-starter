@@ -8,7 +8,7 @@
 - gopath的说明
 - 一个web server例子
 - 编译go代码到exe
-- 监控go代码, 如果发现修改自动编译
+
 
 
 !!! 使用前先看doc里面的文档
@@ -52,18 +52,6 @@ go get 缺少的库地址
 这些缺少的库会在编译时报错, 缺哪个就装哪个
 
 
-### 自动编译
-第一次要安装一个监控程序, 自动监控go的源文件目录, 当有修改自动编译重启
-新开一个控制台, 然后执行
-```
-github.com/luopeizhen/gin
-```
-
-安装完成后, 执行watch.bat
-
-watch执行后, 访问localhost:3000
-
-
 ### 手动编译
 双击setvar.bat, 会打开控制台并将当前目录加入到GOPATH 
 
@@ -71,3 +59,11 @@ watch执行后, 访问localhost:3000
 ```
 go install server
 ```
+
+### 运行程序
+
+在刚才的编译控制台， 执行
+```
+bin\server.exe
+```
+然后浏览器访问 http://localhost:10001
